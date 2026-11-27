@@ -507,7 +507,7 @@ export const PART_TWO: SlideDef[] = [
     className: 's-tools',
     render: Tools,
     notes:
-      'Three models for the brainstorm. ChatGPT as our prompt writer — we told it what we wanted, it wrote the detailed prompts. Claude Code built the product and checked its own work in its browser; Codex did the final polish. The photographs are real, licensed photos by human photographers — we chose not to fake cities. Everything 3D is generated in code, and Netlify hosts it all. This deck was made the same way. Hand over to Matteo.',
+      'Three models for the brainstorm. ChatGPT as our prompt writer — we told it what we wanted, it wrote the detailed prompts. Claude Code built the product and checked its own work in its browser; Codex did the final polish. The photographs are real, licensed photos by human photographers — we chose not to fake cities. Everything 3D is generated in code, and Netlify hosts it all. This deck was made the same way. Hand over to Speaker 4.',
   },
   {
     id: 'prompts',

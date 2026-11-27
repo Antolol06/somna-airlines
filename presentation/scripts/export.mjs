@@ -23,7 +23,7 @@ const b = await launch({ profile: join(tmpdir(), 'somna-deck-export'), url: 'abo
 await b.navigate(`${base}?still=1&i=0#1`);
 await sleep(2500);
 const meta = await b.evaluate(`(async () => { const m = await import('/src/slides/index.ts'); const c = await import('/src/config.ts');
-  return { slides: m.SLIDES.map(s => ({ title: s.title, part: s.part, chapter: s.chapter, seconds: s.seconds, notes: s.notes, speaker: c.TEAM[s.speaker]?.name ?? '' })), total: m.TOTAL_SECONDS } })()`);
+  return { slides: m.SLIDES.map(s => ({ title: s.title, part: s.part, chapter: s.chapter, seconds: s.seconds, notes: s.notes, speaker: 'Speaker ' + (s.speaker + 1) })), total: m.TOTAL_SECONDS } })()`);
 console.log('slides', meta.slides.length);
 
 for (let i = 0; i < meta.slides.length; i++) {

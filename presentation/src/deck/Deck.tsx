@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { SLIDES } from '../slides';
-import { SITE_URL, TEAM } from '../config';
+import { SITE_URL } from '../config';
 import { Clip, M, Wordmark, bt } from './components';
 import type { SlideCtx } from './types';
 import { LiveLayer } from './live/LiveLayer';
@@ -371,7 +371,7 @@ export function Deck() {
                       <span className="ov-meta">
                         <span className="annot">{pad(i + 1)}</span>
                         <span>{bt(x.title)}</span>
-                        <span className="annot ov-who">{TEAM[x.speaker]?.name}</span>
+                        <span className="annot ov-who">Speaker {x.speaker + 1}</span>
                       </span>
                     </button>
                   ),

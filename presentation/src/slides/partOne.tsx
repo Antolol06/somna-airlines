@@ -489,14 +489,14 @@ export const PART_ONE: SlideDef[] = [
     live: SHOTS.cabin,
     render: Manifesto,
     notes:
-      'Our vision in one sentence — it is also the first line of the brief that started the project: “We are not selling flights. We are selling the feeling of waking up somewhere new.” Hand over to Nicolas.',
+      'Our vision in one sentence — it is also the first line of the brief that started the project: “We are not selling flights. We are selling the feeling of waking up somewhere new.”',
   },
   {
     id: 'triptych',
     part: 'I',
     chapter: 'Value proposition',
     title: 'Depart. Dream. Arrive.',
-    speaker: 1,
+    speaker: 0,
     seconds: 30,
     className: 's-triptych',
     render: Triptych,
@@ -508,12 +508,12 @@ export const PART_ONE: SlideDef[] = [
     part: 'I',
     chapter: 'Target audience',
     title: 'Who it is for',
-    speaker: 1,
+    speaker: 0,
     seconds: 25,
     className: 's-audience',
     render: Audience,
     notes:
-      'Three people we designed for: the business traveller with a 9 a.m. meeting; the couple or family whose holiday should start on board; and people who cross continents often and refuse to lose a day each time.',
+      'Three people we designed for: the business traveller with a 9 a.m. meeting; the couple or family whose holiday should start on board; and people who cross continents often and refuse to lose a day each time. Hand over to Speaker 2.',
   },
   {
     id: 'capsule',
@@ -577,7 +577,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-why',
     render: Why,
     notes:
-      'Why people will book it: you are not buying a seat — you are buying a morning. A real bed, a night shaped around you, and a trip that starts rested. From €190 (illustrative). Hand over to Alessandro for the demo.',
+      'Why people will book it: you are not buying a seat — you are buying a morning. A real bed, a night shaped around you, and a trip that starts rested. From €190 (illustrative). Hand over to Speaker 3 for the demo.',
   },
   {
     id: 'demo',

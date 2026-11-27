@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { SLIDES, STARTS, TOTAL_SECONDS } from '../slides';
-import { TEAM } from '../config';
 import { CHANNEL, SlideView, useStageScale } from './Deck';
 import { Wordmark, bt } from './components';
 
@@ -74,8 +73,9 @@ export function Presenter() {
   const elapsed = startedAt ? (now - startedAt) / 1000 : 0;
   const planned = STARTS[st.index];
   const drift = startedAt ? elapsed - planned : 0;
-  const speaker = TEAM[s.speaker];
-  const handover = nx && nx.speaker !== s.speaker ? TEAM[nx.speaker] : null;
+  // speaking parts are labelled by role (Speaker 1–4), not by name
+  const speaker = `Speaker ${s.speaker + 1}`;
+  const handover = nx && nx.speaker !== s.speaker ? `Speaker ${nx.speaker + 1}` : null;
   const maxStep = s.steps ?? 0;
 
   return (
@@ -111,10 +111,10 @@ export function Presenter() {
           <Preview index={st.index + 1} step={0} label={nx ? `Next · ${nx.title}` : 'Next · —'} />
           <div className="pr-speaker">
             <span className="annot">Speaking</span>
-            <strong>{speaker?.name}</strong>
+            <strong>{speaker}</strong>
             {handover && (
               <span className="pr-hand">
-                Next slide → hand over to <strong>{handover.name}</strong>
+                Next slide → hand over to <strong>{handover}</strong>
               </span>
             )}
           </div>
