@@ -1,0 +1,16 @@
+# dependencies and tool caches
+node_modules/
+
+# website build output (npm run build)
+dist/
+
+# presentation build output and generated QA / export images
+# (public/presentation/ — the published copy served by the website — IS kept)
+presentation/dist/
+presentation/export/
+
+# local and OS files
+.claude/settings.local.json
+*.log
+.DS_Store
+Thumbs.db
