@@ -489,7 +489,7 @@ export const PART_ONE: SlideDef[] = [
     live: SHOTS.cabin,
     render: Manifesto,
     notes:
-      'Our vision in one sentence — it is also the first line we ever wrote for this project: “We are not selling flights. We are selling the feeling of waking up somewhere new.” Hand over to Presenter 2.',
+      'Our vision in one sentence — it is also the first line of the brief that started the project: “We are not selling flights. We are selling the feeling of waking up somewhere new.” Hand over to Presenter 2.',
   },
   {
     id: 'triptych',

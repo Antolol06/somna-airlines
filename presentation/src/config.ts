@@ -19,18 +19,24 @@ export const TEAM: { name: string; role: string }[] = [
  */
 const HOSTED_IN_SITE = typeof location !== 'undefined' && /\/presentation\/(index\.html)?$/.test(location.pathname);
 export const SITE_URL = HOSTED_IN_SITE ? new URL('../', location.href).href : 'http://localhost:5173/';
-/** The public link printed on the closing slides (null = not deployed yet). */
-export const PUBLIC_URL: string | null = null;
+/** The public link printed on the closing slides (null = not deployed yet). From our report. */
+export const PUBLIC_URL: string | null = 'somnaairlines.netlify.app';
 
 /** Course details for the title slide of Part II. */
 export const COURSE = 'Generative Artificial Intelligence: Lab & Toolkits';
 export const GROUP: string | null = null;
 
-/** Material we could not verify from the project history — please supply. */
+/**
+ * Material we could not verify from the project history. The first three come from our project
+ * report (“Chronologic Report of Generative AI Project”); the rest is still to supply.
+ */
 export const MISSING = {
-  ideaOrigin: null as string | null, // how the SŌMNA idea first came up (and whether AI helped brainstorm it)
-  briefAuthoring: null as string | null, // was the first 2,105-word brief written by hand or drafted with an AI tool?
-  codexPrompts: null as string | null, // the prompts given to Codex and what was asked
-  otherTools: null as string | null, // any other GenAI tools (naming, images, audio…)
+  ideaOrigin:
+    'We gave the course brief to Claude, ChatGPT and Gemini. Their ideas kept converging — memories, dreams, a “Dreamflix” — until more specific prompts led us to an airline where you sleep in pods, inspired by Japanese pod hotels.' as
+      | string
+      | null,
+  briefAuthoring: 'ChatGPT wrote this brief from our own short request; we pasted it into Claude.' as string | null,
+  otherTools: 'ChatGPT and Gemini (brainstorming, prompt writing) · Netlify (hosting)' as string | null,
+  codexPrompts: null as string | null, // the prompts given to Codex and what was asked (not in the report)
   referenceImage: null as string | null, // path to the capsule-hotel reference image the first brief mentions
 };

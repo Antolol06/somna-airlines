@@ -6,12 +6,17 @@ import { COURSE, GROUP, MISSING, PUBLIC_URL, TEAM } from '../config';
 import cameraSource from '@site/three/scenes/cabinCamera.ts?raw';
 
 // ---------------------------------------------------------------- the verified record
-/** The prompts, exactly as sent (local time, Rome). Word counts measured from the conversation log. */
-const PROMPTS = [
+/**
+ * The prompts Claude received, exactly as sent (local time, Rome; word counts from the conversation
+ * log). As our report describes, ChatGPT wrote them from our own requests (meta-prompting); where the
+ * report quotes our original request, it is shown as `ours`, verbatim.
+ */
+const PROMPTS: { when: string; words: number; label: string; quote: string; also: string; ours?: string; result: string; img: string }[] = [
   {
     when: 'Nov 25 · 21:11',
     words: 2105,
     label: 'The creative brief',
+    ours: 'You need to build to me a prompt to create an interactive 3d website style (like apple presentation ones or like this one https://oryzo.ai/).',
     quote: 'Design and develop a fully functional, cinematic, interactive 3D website for SŌMNA.',
     also: 'The website should feel like an interactive short film in which the visitor controls the camera and the journey.',
     result: 'v1 running 55 minutes later: seven chapters, a 3D aircraft, the capsule, a globe and a dream sequence.',
@@ -30,6 +35,7 @@ const PROMPTS = [
     when: 'Nov 26 · 10:04',
     words: 1290,
     label: 'The quality pass',
+    ours: 'I do not want the cabin to be like one man is walking and the screen is shacking.',
     quote: 'I do not like the current first-person walking effect inside the aircraft cabin.',
     also: 'Do not generate generic city skylines and simply change their names.',
     result: 'v3: three cabins, licensed photographs of real cities, the globe’s white flashes traced to their cause.',
@@ -75,7 +81,7 @@ function Behind(c: SlideCtx) {
           <Lines lines={['Behind', <em key="e">the dream.</em>]} at={0.3} />
         </h1>
         <Rv at={1} as="p" className="lede">
-          How we built <Brand /> with Generative AI — four prompts, one long conversation, a second tool for the finish, nineteen hours.
+          How we built <Brand /> with Generative AI — ideas from three models, prompts by ChatGPT, code by Claude, nineteen hours.
         </Rv>
       </div>
     </>
@@ -91,7 +97,7 @@ const Idea = (c: SlideCtx) => (
         <Lines lines={['“We are not selling flights.', <em key="e">We are selling the feeling of</em>, <em key="f">waking up somewhere new.”</em>]} at={0.25} gap={0.16} />
       </blockquote>
       <Rv at={1.2} className="annot">
-        The first line of our first prompt · Nov 25, 21:11
+        The first line of the brief ChatGPT wrote for us · sent to Claude Nov 25, 21:11
       </Rv>
       <Rv at={1.4} className="id-missing">
         {MISSING.ideaOrigin ? <p className="lede">{MISSING.ideaOrigin}</p> : <Missing label="how the idea first came up — and whether AI helped brainstorm it" />}
@@ -103,7 +109,7 @@ const Idea = (c: SlideCtx) => (
         <strong>
           <Counter to={2105} c={c} delay={0.6} />
         </strong>
-        <span className="annot">words in our first prompt — a full creative brief</span>
+        <span className="annot">words in the creative brief ChatGPT wrote from our request</span>
       </Rv>
       <dl className="id-anatomy">
         {[
@@ -132,12 +138,13 @@ const Idea = (c: SlideCtx) => (
 
 // ---------------------------------------------------------------- 16 · the toolkit
 const TOOLS = [
-  { n: 'Claude Code', by: 'Anthropic', role: 'The builder', use: 'Wrote and debugged everything: 3D scenes, shaders, camera direction, copy, booking flow — in a single conversation of 1,242 agent steps.' },
-  { n: 'Claude’s browser', by: 'built-in', role: 'The critic', use: 'Checked its own work: 157 screenshots and 126 in-page measurements of frame rate, colour and layout.' },
+  { n: 'Claude · ChatGPT · Gemini', by: 'three models', role: 'The brainstorm', use: 'We gave all three the course brief. Their ideas converged — memories, dreams, a “Dreamflix” — until our prompts became more specific.' },
+  { n: 'ChatGPT', by: 'OpenAI', role: 'The prompt writer', use: 'Turned our own words into detailed prompts for Claude — meta-prompting, based on our specifications.' },
+  { n: 'Claude Code', by: 'Anthropic', role: 'The builder', use: 'Wrote and debugged the site in 1,242 agent steps, and checked its own work in its browser: 157 screenshots, 126 in-page measurements.' },
   { n: 'Codex', by: 'OpenAI', role: 'The finisher', use: 'The final polish on day two, 13:20–16:28: 33 files — showcase, navigation, cabin map, the capsule tablet, a demo checkout and a downloadable boarding pass.', missing: 'codexPrompts' },
   { n: 'Unsplash', by: 'human photographers', role: 'The destinations', use: 'Eight licensed photographs of real cities — chosen with the AI, credited on screen. Not AI-generated.' },
-  { n: 'NASA', by: 'Blue & Black Marble', role: 'The Earth', use: 'Public-domain satellite textures for the globe.' },
-  { n: 'Code, not stock', by: 'procedural', role: 'Everything else', use: 'The aircraft, cabins, capsules, clouds and sky are generated in code — no 3D models were bought or downloaded.' },
+  { n: 'Code, not stock', by: 'procedural', role: 'Everything else', use: 'Aircraft, cabins, capsules, clouds and sky are generated in code; the globe uses NASA’s public-domain satellite textures.' },
+  { n: 'Netlify', by: 'hosting', role: 'The launch', use: 'Hosts the website and this presentation: somnaairlines.netlify.app.' },
 ];
 const Tools = (c: SlideCtx) => (
   <>
@@ -147,7 +154,7 @@ const Tools = (c: SlideCtx) => (
         <Lines lines={['One studio,', <em key="e">mostly made of prompts.</em>]} at={0.2} />
       </h1>
       <Rv at={1.2} as="p" className="lede tl-meta">
-        This deck was made the same way: a 1,240-word brief to Claude Code — and it runs the website’s own 3D, live.
+        This deck was made the same way: a 1,240-word brief written with ChatGPT, built by Claude Code — and it runs the website’s own 3D, live.
       </Rv>
       {!MISSING.otherTools && (
         <Rv at={1.4}>
@@ -197,9 +204,15 @@ const Prompts = (c: SlideCtx) => {
         </ol>
       </div>
       <div className="pr-main" key={cur}>
-        <span className="annot pr-num">Prompt 0{cur + 1} · verbatim</span>
+        <span className="annot pr-num">Prompt 0{cur + 1} · written with ChatGPT, sent to Claude · verbatim</span>
         <blockquote className="d-m">“{bt(p.quote)}”</blockquote>
-        <p className="pr-also">“{p.also}”</p>
+        {p.ours ? (
+          <p className="pr-also pr-ours">
+            <span className="annot">Our words, to ChatGPT</span>“{p.ours}”
+          </p>
+        ) : (
+          <p className="pr-also">“{p.also}”</p>
+        )}
         <div className="pr-result">
           <Img src={p.img} />
           <div>
@@ -221,7 +234,7 @@ const PromptResult = (c: SlideCtx) => (
         <Typewriter c={c} text="Think of a camera mounted on a professional cinematic dolly rather than a first-person video game." cps={34} delay={0.6} />
       </p>
       <Rv at={0.3} className="annot">
-        Prompt 04 · Nov 26, 12:14 · sent with a 20-second screen recording of what felt wrong
+        Prompt 04 · written with ChatGPT · sent Nov 26, 12:14 with a 20-second screen recording of what felt wrong
       </Rv>
     </div>
     <div className="px-compare">
@@ -243,7 +256,7 @@ const PromptResult = (c: SlideCtx) => (
 
 // ---------------------------------------------------------------- 19 · evolution timeline
 const STAGES = [
-  { t: 'Nov 25 · 21:11', h: 'The brief', b: '2,105 words', img: null },
+  { t: 'Nov 25 · 21:11', h: 'The brief', b: '2,105 words, written by ChatGPT', img: null },
   { t: '22:06', h: 'v1 is live', b: 'First self-review screenshots', img: 'history/v1_hero.jpg' },
   { t: '22:35', h: 'v2', b: 'Globe, the Ō, a new cabin', img: 'history/v2_cabin.jpg' },
   { t: 'Nov 26 · 10:04', h: 'v3', b: 'Three cabins, real cities', img: 'history/v3_os.jpg' },
@@ -333,12 +346,14 @@ const BeforeAfterSlide = (c: SlideCtx) => {
 };
 
 // ---------------------------------------------------------------- 22 · human in the loop
+// Our own words only — the long prompts Claude received were written by ChatGPT (see the report).
+// Quotes 1, 4 and 5 are from our requests as quoted in the report; 2 and 3 are our replies to Claude.
 const DECISIONS = [
-  { q: 'The cabin presentation is currently the weakest part of the website.', ctx: 'We judged the work. The AI never decided something was good enough.' },
-  { q: 'Only free things.', ctx: 'We turned down a paid photorealistic city service and chose free, licensed photography.' },
+  { q: 'I do not want the cabin to be like one man is walking', ctx: 'We judged the work. The AI never decided something was good enough.' },
+  { q: 'Only free things.', ctx: 'Claude asked whether to buy a map service or use licensed photos. We chose free, licensed photography.' },
   { q: 'Yes, download them.', ctx: 'We approved the eight destination photos from forty-eight candidates.' },
-  { q: 'Please review the attached screen recording carefully.', ctx: 'When words were not enough, we showed it what felt wrong.' },
-  { q: 'The website should be considered complete.', ctx: 'We decided when to stop — and moved the final polish to a second tool.' },
+  { q: 'Let me try the checkout like a real booking.', ctx: 'We asked for the real thing: card details you can type, a ticket you can download.' },
+  { q: 'rewrite as a good prompt.', ctx: 'We said what we wanted in our own words — ChatGPT turned it into precise prompts for Claude.' },
 ];
 const Human = (c: SlideCtx) => (
   <>
@@ -366,7 +381,7 @@ const Human = (c: SlideCtx) => (
 // ---------------------------------------------------------------- 23 · by the numbers
 const NUMBERS: { n: number; f?: (v: number) => string; l: string }[] = [
   { n: 19.3, f: (v) => v.toFixed(1), l: 'hours from first prompt to finished site' },
-  { n: 4, l: 'prompts that shaped the product in Claude Code' },
+  { n: 4, l: 'prompts, written with ChatGPT, that shaped the product in Claude Code' },
   { n: 1242, l: 'agent steps in one conversation' },
   { n: 157, l: 'screenshots the AI took to review its own work' },
   { n: 14015, l: 'lines of code across 57 files' },
@@ -393,46 +408,47 @@ const Numbers = (c: SlideCtx) => (
   </>
 );
 
-// ---------------------------------------------------------------- 24 · honest view
+// ---------------------------------------------------------------- 24 · pros & cons
+// Word for word from our project report (“Final Evaluation of Pros and Cons”); each item's
+// first words are set brighter, the rest of the sentence follows unchanged.
+const PROS: [string, string][] = [
+  ['Fast output', ' (subject to how demanding the task is)'],
+  ['Increased productivity', ' (possibility to subsequently work on multiple tasks)'],
+  ['Easy interface', ' due to simple chat mechanics'],
+  ['Capable of asking clarifying question', ' intermittently'],
+];
+const CONS: [string, string][] = [
+  ['Large output convergence', ', giving rise to AI slop'],
+  ['False sense of confidence', ' in presenting AI slop as unique and original'],
+  ['Presentation of arbitrary/subjective values', ' with little-to-no added value'],
+  ['There are time and token limit-related constraints', ''],
+  ['Requirement to point out flaws in the output.', ''],
+];
 const Honest = (c: SlideCtx) => (
   <>
     <div className="hn-head">
-      <Eyebrow at={0.1}>Our honest view</Eyebrow>
+      <Eyebrow at={0.1}>From our report</Eyebrow>
       <h1 className="d-m">
-        <Lines lines={['Fast, broad, tireless.', <em key="e">Not yet a judge of taste.</em>]} at={0.2} />
+        <Lines lines={['Final evaluation', <em key="e">of pros and cons.</em>]} at={0.2} />
       </h1>
     </div>
     <div className="hn-cols">
-      <div>
-        <Rv at={0.5} className="annot hn-tag">
-          What it gave us
-        </Rv>
-        {[
-          ['Speed', 'A working 3D website 55 minutes after the first prompt.'],
-          ['Range', '3D, shaders, motion, copy and booking logic from one conversation.'],
-          ['Self-checking', 'It measured frame rates and screenshotted its own pages.'],
-        ].map(([h, p], i) => (
-          <Rv at={0.6 + i * 0.12} className="hn-item" key={h}>
-            <h3>{h}</h3>
-            <p>{p}</p>
+      {([
+        ['Pros', PROS, ''],
+        ['Cons', CONS, 'hn-tag-c'],
+      ] as const).map(([tag, items, cls]) => (
+        <div key={tag}>
+          <Rv at={0.5} className={`annot hn-tag ${cls}`}>
+            {tag}
           </Rv>
-        ))}
-      </div>
-      <div>
-        <Rv at={0.5} className="annot hn-tag hn-tag-c">
-          Where it fell short
-        </Rv>
-        {[
-          ['It cannot feel', 'It did not notice the cabin “felt like a video game” — we did.'],
-          ['Confident first answers', 'Fake skylines, a flashing globe, a broken Ō — all shipped as finished.'],
-          ['Everything needs checking', 'Facts, licences and fixes had to be verified — some took two attempts.'],
-        ].map(([h, p], i) => (
-          <Rv at={0.6 + i * 0.12} className="hn-item" key={h}>
-            <h3>{h}</h3>
-            <p>{p}</p>
-          </Rv>
-        ))}
-      </div>
+          {items.map(([lead, rest], i) => (
+            <Rv at={0.6 + i * 0.1} className="hn-item" key={lead} as="p">
+              <b>{lead}</b>
+              {rest}
+            </Rv>
+          ))}
+        </div>
+      ))}
     </div>
   </>
 );
@@ -475,7 +491,7 @@ export const PART_TWO: SlideDef[] = [
     seconds: 15,
     className: 's-behind',
     render: Behind,
-    notes: 'Part II. On the left, the product; on the right, the real code behind its camera — written by AI, directed by us. “Four prompts, one long conversation, a second tool for the finish — nineteen hours.”',
+    notes: 'Part II. On the left, the product; on the right, the real code behind its camera — written by AI, directed by us. “Three models for the idea, ChatGPT for the prompts, Claude for the build — nineteen hours.”',
   },
   {
     id: 'idea',
@@ -487,7 +503,7 @@ export const PART_TWO: SlideDef[] = [
     className: 's-idea',
     render: Idea,
     notes:
-      'Our first prompt was not “make a website”. It was a 2,105-word creative brief: the name, the promise, the palette, our references and our rules — no stock photography, no generic layouts. [Fill in: how the idea came up, and how the brief was written.]',
+      'We started by giving the course brief to Claude, ChatGPT and Gemini — and they kept converging on the same ideas: memories, dreams, a “Dreamflix”. Only when we made our prompts more specific did we find ours: an airline where you sleep in pods, inspired by Japanese pod hotels. We then asked ChatGPT to write the prompt for us, inspired by Apple’s scrolling pages and oryzo.ai — and it came back as a 2,105-word creative brief: the name, the promise, the palette, the rules. We pasted it into Claude.',
   },
   {
     id: 'tools',
@@ -499,7 +515,7 @@ export const PART_TWO: SlideDef[] = [
     className: 's-tools',
     render: Tools,
     notes:
-      'Claude Code built the product, and its built-in browser let it check its own work. Codex did the final polish. The photographs are real, licensed photos by human photographers — we chose not to fake cities. Everything 3D is generated in code. And this deck was made the same way. Hand over to Presenter 4.',
+      'Three models for the brainstorm. ChatGPT as our prompt writer — we told it what we wanted, it wrote the detailed prompts. Claude Code built the product and checked its own work in its browser; Codex did the final polish. The photographs are real, licensed photos by human photographers — we chose not to fake cities. Everything 3D is generated in code, and Netlify hosts it all. This deck was made the same way. Hand over to Presenter 4.',
   },
   {
     id: 'prompts',
@@ -512,7 +528,7 @@ export const PART_TWO: SlideDef[] = [
     className: 's-prompts',
     render: Prompts,
     notes:
-      'Four prompts did most of the work — all quoted verbatim. 01 the brief. → 02 our first critique: the cabin was the weakest part, and the Ō was broken. → 03 the quality pass: no more walking camera, and no fake cities. → 04 we attached a screen recording and asked for a camera on a dolly. Notice how the prompts become shorter and more precise.',
+      'Four prompts did most of the work — quoted verbatim. Each one was written by ChatGPT from our own words: meta-prompting. 01: we asked for “a prompt to create an interactive 3d website”; ChatGPT wrote the brief. → 02 the first critique: the cabin was the weakest part, and the Ō was broken. → 03 compare our words — “one man is walking and the screen is shacking” — with the prompt ChatGPT made of them. → 04 with a screen recording: a camera on a dolly.',
   },
   {
     id: 'prompt-result',
@@ -535,7 +551,7 @@ export const PART_TWO: SlideDef[] = [
     seconds: 30,
     className: 's-timeline',
     render: Timeline,
-    notes: 'The whole evolution: brief at 21:11, a running v1 at 22:06, four versions with Claude Code, then Codex refinements from 13:20 to 16:28 the next day. Every timestamp comes from the project log and file history.',
+    notes: 'The whole evolution: the brief ChatGPT wrote for us, sent at 21:11; a running v1 at 22:06; four versions with Claude Code — slowed down by its usage limits — then Codex refinements from 13:20 to 16:28 the next day. Every timestamp comes from the project log and file history.',
   },
   {
     id: 'fails',
@@ -570,7 +586,7 @@ export const PART_TWO: SlideDef[] = [
     seconds: 25,
     className: 's-human',
     render: Human,
-    notes: 'Every quote here is something we actually typed. We judged quality, set limits (“only free things”), chose the photographs, recorded our screen when words failed — and decided when it was finished.',
+    notes: 'Every quote here is something we typed ourselves — the long prompts Claude received were ChatGPT’s rewrites of words like these. We judged quality, set limits (“only free things”, when Claude asked about a paid map service), chose the photographs, asked for the real thing — and decided when it was finished.',
   },
   {
     id: 'numbers',
@@ -581,18 +597,19 @@ export const PART_TWO: SlideDef[] = [
     seconds: 15,
     className: 's-numbers',
     render: Numbers,
-    notes: 'Quick: 19.3 hours, four prompts, 1,242 agent steps, 157 self-review screenshots, 14,015 lines of code — and not a single 3D model bought or downloaded.',
+    notes: 'Quick: 19.3 hours, four prompts written with ChatGPT, 1,242 agent steps, 157 self-review screenshots, 14,015 lines of code — and not a single 3D model bought or downloaded.',
   },
   {
     id: 'honest',
     part: 'II',
     chapter: 'Pros & cons',
-    title: 'Our honest view',
+    title: 'Pros and cons',
     speaker: 1,
     seconds: 35,
     className: 's-honest',
     render: Honest,
-    notes: 'What it gave us: speed, range, self-checking. Where it fell short: it cannot feel what we feel, its first answers were confidently wrong, and everything needed verifying. The taste was ours.',
+    notes:
+      'Our final evaluation, as in the report. Pros: fast output — depending on how demanding the task is; increased productivity, because we could work on several tasks at once; an easy chat interface; and it asks clarifying questions along the way. Cons: the outputs converge, which gives rise to AI slop — and a false sense of confidence in presenting that slop as unique and original; arbitrary, subjective values with little added value; time and token limits; and we always had to point out the flaws in the output ourselves.',
   },
   {
     id: 'final',

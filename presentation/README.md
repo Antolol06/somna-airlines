@@ -122,6 +122,8 @@ node presentation/scripts/export.mjs
 
 Part II uses only verifiable material:
 
+* **Our project report** — how the idea came about, who wrote the prompts (ChatGPT, from our own requests:
+  meta-prompting), our original requests to ChatGPT, the tools, Netlify and the pros and cons come from it.
 * **Prompts** — quoted verbatim from the project conversation; word counts measured from it
   (2,105 · 498 · 1,290 · 744 words; this deck’s brief: 1,240).
 * **Timestamps** — conversation log and file modification times (Rome time). First prompt Nov 25, 21:11;
@@ -139,12 +141,12 @@ Part II uses only verifiable material:
 These appear on screen as dashed **“To add”** markers until filled in (`src/config.ts`):
 
 1. **Team names** and who presents which part (`TEAM`; slides already assign speakers 1–4).
-2. **How the idea came about** — and whether an AI tool helped brainstorm or name it.
-3. **Who drafted the 2,105-word creative brief**, and with which tool.
+2. ~~How the idea came about~~ — done, from our report (brainstorm with Claude, ChatGPT and Gemini; Japanese pod hotels).
+3. ~~Who drafted the 2,105-word creative brief~~ — done: ChatGPT, from our own request (report).
 4. **The prompts given to Codex** (we can see *what* changed, not what was asked).
-5. **Any other GenAI tools** used (naming, images, audio…).
+5. ~~Any other GenAI tools~~ — done: ChatGPT and Gemini, plus Netlify for hosting (report).
 6. The **capsule-hotel reference image** the first brief mentions (it is not in the project history).
-7. The **public website URL** for the closing slides and the teachers (`PUBLIC_URL`).
+7. ~~The public website URL~~ — done: `somnaairlines.netlify.app`, from our project report (`PUBLIC_URL`).
 
 ## Structure
 
