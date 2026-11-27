@@ -1,7 +1,7 @@
 # SŌMNA — The Launch (presentation)
 
 A standalone, web-based keynote for the SŌMNA final project: **Part I — the pitch**, **Part II — behind the scenes**.
-25 slides, planned at **14:00** (the brief allows 15 minutes, including the live website demo).
+25 slides, planned at **15:00**: Part I 10:40 including the live website demo, Part II 4:20 (the brief allows 15 minutes).
 
 The website in the parent folder is **not modified** by any of this. The deck is its own Vite app; it reuses the
 site's fonts, brand data and its real-time 3D scenes through read-only imports (`@site/…`).
