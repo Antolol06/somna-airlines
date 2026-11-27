@@ -46,18 +46,25 @@ writeFileSync(join(root, 'SOMNA-Presentation.pdf'), Buffer.from(pdf.data, 'base6
 console.log('wrote SOMNA-Presentation.pdf');
 
 // ---- speaker notes PDF (A4 landscape: slide + speaker, timing and notes)
+// notes: paragraphs split on blank lines; [square brackets] = a direction or a click cue
+const script = (notes) =>
+  notes
+    .split(/\n\s*\n/)
+    .map((p) => `<p>${esc(p).replace(/\[([^\]]*)\]/g, '<span class="c">$1</span>')}</p>`)
+    .join('');
 let t = 0;
 const notesHtml = `<!doctype html><meta charset="utf-8"><style>
 @page{size:A4 landscape;margin:14mm}body{font-family:'Segoe UI',Helvetica,Arial,sans-serif;color:#111;margin:0}
 .p{display:grid;grid-template-columns:150mm 1fr;gap:10mm;page-break-after:always;break-after:page;align-items:start}
 img{width:150mm;border-radius:2mm;border:0.3mm solid #ccc}h2{margin:0 0 2mm;font-weight:500;font-size:16pt}
-.m{font-size:9pt;letter-spacing:0.08em;text-transform:uppercase;color:#7a6342;margin-bottom:4mm}p{font-size:12.5pt;line-height:1.5;margin:0}
+.m{font-size:9pt;letter-spacing:0.08em;text-transform:uppercase;color:#7a6342;margin-bottom:4mm}p{font-size:11pt;line-height:1.5;margin:0 0 2.4mm}
+.c{font-family:Consolas,'Courier New',monospace;font-size:8.6pt;color:#6b5434;background:#f4ede2;border-radius:1mm;padding:0.2mm 1.2mm}
 </style>
 ${meta.slides
   .map((s, i) => {
     const at = t;
     t += s.seconds;
-    return `<div class="p"><img src="${pathToFileURL(join(out, 'slides', `${pad(i + 1)}.jpg`)).href}"><div><div class="m">${pad(i + 1)} · Part ${s.part} · ${esc(s.chapter)} · ${esc(s.speaker)} · ${Math.floor(at / 60)}:${pad(at % 60)} → ${s.seconds}s</div><h2>${esc(s.title)}</h2><p>${esc(s.notes)}</p></div></div>`;
+    return `<div class="p"><img src="${pathToFileURL(join(out, 'slides', `${pad(i + 1)}.jpg`)).href}"><div><div class="m">${pad(i + 1)} · Part ${s.part} · ${esc(s.chapter)} · ${esc(s.speaker)} · ${Math.floor(at / 60)}:${pad(at % 60)} → ${s.seconds}s</div><h2>${esc(s.title)}</h2>${script(s.notes)}</div></div>`;
   })
   .join('\n')}`;
 writeFileSync(join(out, 'notes.html'), notesHtml);

@@ -2243,9 +2243,10 @@ em {
   overflow: auto;
 }
 .presenter {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: grid;
-  grid-template-rows: auto 1fr auto auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 16px;
   padding: 18px 24px;
   background: #07080b;
@@ -2289,8 +2290,8 @@ em {
 }
 .pr-body {
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 20px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 1fr);
+  gap: 22px;
   min-height: 0;
 }
 .pv {
@@ -2317,6 +2318,8 @@ em {
   color: var(--iv55);
 }
 .pr-side {
+  min-height: 0;
+  overflow: auto;
   display: grid;
   align-content: start;
   gap: 18px;
@@ -2357,21 +2360,47 @@ em {
   padding: 0 18px;
   font-size: 12px;
 }
+/* the script: the reading surface of the presenter view */
 .pr-notes {
-  padding: 18px 22px;
+  min-height: 0;
+  overflow: auto;
+  padding: 20px 26px 26px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.02);
 }
 .pr-notes .annot {
   font-size: 11px;
+  color: var(--champagne);
 }
-.pr-notes p {
-  margin: 10px 0 0;
+.pr-script p {
+  margin: 16px 0 0;
   font-size: 23px;
-  line-height: 1.5;
+  line-height: 1.55;
   font-weight: 300;
-  color: var(--iv90);
+  color: var(--ivory);
+}
+.pr-cue {
+  font-family: var(--mono);
+  font-size: 0.66em;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  color: var(--champagne);
+  background: rgba(200, 173, 133, 0.1);
+  border: 1px solid rgba(200, 173, 133, 0.3);
+  border-radius: 6px;
+  padding: 1px 7px;
+  margin: 0 3px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.pr-cue.pr-click {
+  font-size: 0.8em;
+  padding: 0 9px;
+  color: #090b10;
+  background: var(--champagne);
+  border-color: var(--champagne);
+  font-weight: 500;
 }
 .pr-strip {
   display: flex;

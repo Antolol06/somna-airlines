@@ -450,7 +450,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-cold',
     render: ColdOpen,
     notes:
-      'Lights low. Say nothing for two seconds — let the ring breathe. The two lines appear on their own. Read the second line slowly: “…someone is trying to sleep sitting up.” Pause, then press → .',
+      "[The two lines appear on their own; start speaking once they are on screen.]\n\nGood morning, everyone. As you can read on the screen: tonight, somewhere over the ocean, someone is trying to sleep sitting up. Most of us know that feeling. You take an overnight flight, you try to sleep in your seat, and you arrive tired — and often you lose the first day of your trip just recovering. [→]",
   },
   {
     id: 'problem',
@@ -463,7 +463,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-problem',
     render: Problem,
     notes:
-      'Long-haul flying has one shape: rows of seats. → (step 1) Rows. Armrests. The middle seat. A whole night spent upright — we accept it because there has never been an alternative. → (step 2) The seat map dissolves into one shape: what if every passenger simply had a bed of their own?',
+      "The reason is simple: long-haul flying was designed for sitting. What you see here is a typical economy cabin — three seats, four seats, three seats, row after row. [→]\n\nThat means armrests, the middle seat, and a whole night spent upright. Even on a very long night flight, most passengers never really lie down. We accept it because it has always been like this. [→]\n\nSo we started from a simple question: what if every passenger had a bed of their own? Here you can see the same cabin, but instead of rows of seats, it becomes a set of private beds. [→]",
   },
   {
     id: 'reveal',
@@ -476,7 +476,7 @@ export const PART_ONE: SlideDef[] = [
     live: SHOTS.hero,
     render: Reveal,
     notes:
-      'Let the wordmark draw itself. “This is SŌMNA — the sleeping-capsule airline. Fall asleep here. Wake up anywhere.” Every passenger gets a private capsule with a real bed.',
+      "This is SŌMNA, a sleeping-capsule airline, and our slogan is: fall asleep here, wake up anywhere. The idea is that the flight is no longer something you just have to get through. On our aircraft there are no rows of seats: every passenger has a private capsule with a full-length bed, so you can actually sleep through the night. [→]",
   },
   {
     id: 'manifesto',
@@ -489,7 +489,7 @@ export const PART_ONE: SlideDef[] = [
     live: SHOTS.cabin,
     render: Manifesto,
     notes:
-      'Our vision in one sentence — it is also the first line of the brief that started the project: “We are not selling flights. We are selling the feeling of waking up somewhere new.”',
+      "Our vision fits in one sentence, and it was also the first line of our very first prompt: we are not selling flights, we are selling the feeling of waking up somewhere new. In other words, the product is not the seat or the route — it is how you feel when you land. [→]",
   },
   {
     id: 'triptych',
@@ -501,7 +501,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-triptych',
     render: Triptych,
     notes:
-      'Our promise has three words. Depart — an aircraft with no rows. Dream — a real bed, and a night set the way you like it. Arrive — wake to sunrise, rested, in another city.',
+      "We built the whole experience around three steps. Depart: you board an aircraft with private capsules instead of rows. Dream: during the night you sleep in a real bed, and you decide the light, the temperature and the sound around you. Arrive: you wake up rested, at sunrise, in another city — here, for example, Paris. Everything we designed, on the website and in the product, follows these three steps. [→]",
   },
   {
     id: 'audience',
@@ -513,7 +513,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-audience',
     render: Audience,
     notes:
-      'Three people we designed for: the business traveller with a 9 a.m. meeting; the couple or family whose holiday should start on board; and people who cross continents often and refuse to lose a day each time. Hand over to Speaker 2.',
+      "We had three kinds of travellers in mind. First, business travellers: people who land in the morning, go straight to a 9 a.m. meeting and need to be at their best. Second, couples and families, who want their holiday to start the moment they get on the plane, not the day after. And third, people who often travel between continents and don’t want to lose a day every time they fly. What they have in common is that they need to arrive feeling like themselves.\n\nNow [Speaker 2] will show you the product in more detail. [→]",
   },
   {
     id: 'capsule',
@@ -527,7 +527,7 @@ export const PART_ONE: SlideDef[] = [
     live: SHOTS.showcase,
     render: Capsule,
     notes:
-      'This is the website’s own 3D capsule showcase, running live. Drag to turn it. → (step 1) It opens into its eight systems, and the marker walks through them one at a time: privacy shade, full-length bed, adaptive lighting, acoustic liner, ceiling display, storage, airflow, personal climate. → (step 2) The light shifts to “Dream”. You can switch between Essential, Signature and Grand with the buttons.',
+      "Thank you. This is our capsule. It is not a video — it is the actual 3D model from our website, running live, so I can turn it around. [Drag the capsule to turn it.]\n\nThis is the Signature capsule, about 2.15 metres long. It is a private room with a full-length bed, lighting you can adjust and its own climate control. [→]\n\nIf we open it up, you can see the eight systems inside: a privacy shade that closes the capsule, a layered mattress so you sleep fully flat, adaptive lighting, an acoustic liner that softens the cabin noise, a display in the ceiling you can watch lying down, a storage space, filtered air circulation, and your own temperature, between 18 and 24 degrees. [→]\n\nThe lighting has three modes. This is Dream, a darker blue light for the night. There is also Relax, a warm light, and Wake, which feels like a sunrise. [→]",
   },
   {
     id: 'tiers',
@@ -540,7 +540,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-tiers',
     render: Tiers,
     notes:
-      'Three cabins on one aircraft. Essential — a private, full-length bed in a two-tier gallery, from €190. → Signature — wider, single level, walnut and leather, from €340. → Grand — a suite with a double bed, from €690. (Fares are illustrative.)',
+      "On the same aircraft there are three cabin types. Essential is the most accessible: a private, full-length bed, two metres by ninety centimetres, in a gallery on two levels with 24 capsules. Prices start at €190. [→]\n\nSignature is on a single level, with wider capsules — the bed is 1.20 metres wide — warm walnut and soft leather, and only 8 capsules. It starts at €340. [→]\n\nAnd Grand is a private suite behind a full-height door, with a double bed. There are six per flight, starting at €690. All these prices are illustrative; on the website the fare depends on the distance and the cabin you choose. [→]",
   },
   {
     id: 'journey',
@@ -552,7 +552,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-journey',
     render: Journey,
     notes:
-      'The whole experience in seven moments: choose where you want to wake up, choose your capsule, board, settle in, set your night, dream — and wake up somewhere new.',
+      "This slide shows a whole trip, step by step. You choose where you want to wake up, and then you choose your own capsule. You board and settle in. You set up your night: light, temperature, sound, and when you want to be woken. Then you sleep, and you wake up at your destination. These are also the steps you can follow on the website. [→]",
   },
   {
     id: 'features',
@@ -565,7 +565,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-features',
     render: Features,
     notes:
-      'What makes it different. SŌMNA OS — a touchscreen built into the capsule wall that changes the real room around you. → Waking with light instead of alarms. → And booking that remembers your night, down to a boarding pass.',
+      "Three features make the difference. The first is SŌMNA OS, a touchscreen built into the capsule wall. From there you control the light and its colour, the temperature, how dark the window is, the sound and your wake-up — and when you change something, the capsule around you changes with it. [→]\n\nThe second is waking up with light instead of an alarm. You choose when: on arrival, or 30 or 60 minutes before. Then the capsule slowly fills with warm morning light, the shade goes up, and you see the city you chose. [→]\n\nThe third is the booking. You pick your exact capsule on a live cabin map, set your preferences once, and at the end you can download your boarding pass. [→]",
   },
   {
     id: 'why',
@@ -577,7 +577,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-why',
     render: Why,
     notes:
-      'Why people will book it: you are not buying a seat — you are buying a morning. A real bed, a night shaped around you, and a trip that starts rested. From €190 (illustrative). Hand over to Speaker 3 for the demo.',
+      "So why would people choose SŌMNA? Because you are not really paying for a seat — you are paying for a good night and a better morning. You get a real bed, fully flat and private. You get a night set up the way you like it. And you arrive rested, so your trip starts when you land, not the day after. Prices start at €190 per night.\n\nNow [Speaker 3] will show you the website, live. [→]",
   },
   {
     id: 'demo',
@@ -589,7 +589,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-demo',
     render: Demo,
     notes:
-      'Press Enter (or click) to open the live website inside the deck; “Back to the presentation” returns here. Suggested 2½-minute path: 1) Begin in silence → scroll the hero into the cabin. 2) Scroll through Essential → Signature → Grand. 3) “The capsule”: explode it. 4) Destinations: pick a city on the globe → “Dream me there”. 5) In the capsule, tap the wall tablet, switch the light to Dream. 6) “Good night” — or Skip to the arrival. 7) “Choose your capsule” → cabin map. If the site is offline, the deck plays a recorded walkthrough instead.',
+      "[Press Enter on this slide and the website opens inside the presentation; ← Back to the presentation (or Esc) brings you back. Keep each stop short.]\n\n1. [Before opening] Now I’ll show you the website, live. Everything you will see is built in code, in the browser. [Press Enter.]\n\n2. [Click Begin in silence and scroll slowly.] The site works like a short film: as you scroll, the camera moves from outside the aircraft, through the window, into the cabin.\n\n3. [Keep scrolling through the cabins.] Here are the three cabin types we just talked about: Essential, Signature and Grand. The camera stops on each one, so you can see the difference.\n\n4. [In The Capsule, click Exploded view.] This is the capsule section. You can open the capsule, look at each part, and change the light.\n\n5. [Scroll to the globe, pick a city, then click Dream me there.] Here you choose your destination on the globe. There are eight cities, each with a real photograph. When you click ‘Dream me there’, the trip starts.\n\n6. [In the capsule, tap the tablet in the wall and switch the light to Dream.] We are now inside the capsule. This is the touchscreen we talked about: if I change the light here, the room changes with it.\n\n7. [Tap Good night, or Skip to the arrival.] Then you fall asleep, and you wake up at your destination, with the city in front of you.\n\n8. [If there is time, open Book a Dream and show the Cabin map.] Finally, the booking page. You can book for up to four people, choose your exact capsules on the cabin map, try a demo payment, and download your boarding pass.\n\n9. [Click ← Back to the presentation.] That is the website. [→ to the close]\n\n[If the website does not load (no internet), the slide plays a recorded walkthrough instead: narrate the same path over it.]",
   },
   {
     id: 'close1',
@@ -601,6 +601,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-close1 s-live',
     live: SHOTS.finale,
     render: CloseOne,
-    notes: '“Go further. Dream deeper. Arrive differently.” Pause on the sunrise. Then: “Now let us show you how we built it.”',
+    notes:
+      "Our closing line is: go further, dream deeper, arrive differently. It sums up what SŌMNA is about — not the flight itself, but the way you arrive. You can try the website yourself at somnaairlines.netlify.app. In the second part, we will show you how we built all of this with generative AI. [→ to Part II]",
   },
 ];

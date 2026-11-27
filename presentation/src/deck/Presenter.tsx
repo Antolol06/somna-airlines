@@ -7,6 +7,30 @@ const pad = (n: number) => String(n).padStart(2, '0');
 const mmss = (s: number) => `${Math.floor(Math.max(0, s) / 60)}:${pad(Math.floor(Math.max(0, s) % 60))}`;
 const START_KEY = 'somna-deck-start';
 
+/**
+ * A slide's notes as a readable script: paragraphs split on blank lines; anything in [square
+ * brackets] is a direction or a click cue ([→]) and is set apart from the words to say.
+ */
+function Script({ text }: { text: string }) {
+  return (
+    <div className="pr-script">
+      {text.split(/\n\s*\n/).map((para, i) => (
+        <p key={i}>
+          {para.split(/(\[[^\]]*\])/).map((part, j) =>
+            /^\[[^\]]*\]$/.test(part) ? (
+              <span key={j} className={`pr-cue ${part === '[→]' ? 'pr-click' : ''}`}>
+                {part.slice(1, -1)}
+              </span>
+            ) : (
+              <span key={j}>{bt(part)}</span>
+            ),
+          )}
+        </p>
+      ))}
+    </div>
+  );
+}
+
 /** A static, scaled render of a slide (no motion, final build) for the presenter's previews. */
 function Preview({ index, step, label }: { index: number; step: number; label: string }) {
   const box = useRef<HTMLDivElement>(null);
@@ -104,11 +128,17 @@ export function Presenter() {
         </div>
       </header>
       <div className="pr-body">
-        <div className="pr-now">
-          <Preview index={st.index} step={st.step} label={`Now · ${pad(st.index + 1)} / ${pad(SLIDES.length)} · ${s.title}${maxStep ? ` · build ${st.step + 1}/${maxStep + 1}` : ''}`} />
-        </div>
+        {/* the script, large and on the left: what to say, with the click cues and directions set apart */}
+        <section className="pr-notes" key={st.index}>
+          <span className="annot">
+            {s.part === 'I' ? 'Part I' : 'Part II'} · {s.chapter} · {mmss(s.seconds)} · {speaker}
+          </span>
+          <Script text={s.notes} />
+        </section>
         <aside className="pr-side">
-          <Preview index={st.index + 1} step={0} label={nx ? `Next · ${nx.title}` : 'Next · —'} />
+          <div className="pr-now">
+            <Preview index={st.index} step={st.step} label={`Now · ${pad(st.index + 1)} / ${pad(SLIDES.length)} · ${s.title}${maxStep ? ` · build ${st.step + 1}/${maxStep + 1}` : ''}`} />
+          </div>
           <div className="pr-speaker">
             <span className="annot">Speaking</span>
             <strong>{speaker}</strong>
@@ -132,14 +162,9 @@ export function Presenter() {
               Black
             </button>
           </div>
+          <Preview index={st.index + 1} step={0} label={nx ? `Next · ${nx.title}` : 'Next · —'} />
         </aside>
       </div>
-      <section className="pr-notes">
-        <span className="annot">
-          {s.part === 'I' ? 'Part I' : 'Part II'} · {s.chapter} · {Math.round(s.seconds)} s
-        </span>
-        <p>{bt(s.notes)}</p>
-      </section>
       <nav className="pr-strip">
         {SLIDES.map((x, i) => (
           <button key={x.id} className={i === st.index ? 'on' : i < st.index ? 'done' : ''} onClick={() => cmd('goto', { index: i })} title={x.title}>
