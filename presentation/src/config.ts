@@ -6,10 +6,10 @@
 
 /** Group members, in speaking order. Each slide names its speaker by index (0–3). */
 export const TEAM: { name: string; role: string }[] = [
-  { name: 'Presenter 1', role: 'Opening & the problem' },
-  { name: 'Presenter 2', role: 'The product' },
-  { name: 'Presenter 3', role: 'Live demo & how it began' },
-  { name: 'Presenter 4', role: 'Behind the scenes' },
+  { name: 'Antonio Maria Cosentino', role: 'Opening & the problem' },
+  { name: 'Nicolas Schön', role: 'The product' },
+  { name: 'Alessandro Grande', role: 'Live demo & how it began' },
+  { name: 'Matteo Gelsomino', role: 'Behind the scenes' },
 ];
 
 /**
@@ -27,16 +27,14 @@ export const COURSE = 'Generative Artificial Intelligence: Lab & Toolkits';
 export const GROUP: string | null = null;
 
 /**
- * Material we could not verify from the project history. The first three come from our project
- * report (“Chronologic Report of Generative AI Project”); the rest is still to supply.
+ * Material we could not verify from the project history. The first two come from our project
+ * report (“Chronologic Report of Generative AI Project”).
  */
 export const MISSING = {
   ideaOrigin:
     'We gave the course brief to Claude, ChatGPT and Gemini. Their ideas kept converging — memories, dreams, a “Dreamflix” — until more specific prompts led us to an airline where you sleep in pods, inspired by Japanese pod hotels.' as
       | string
       | null,
-  briefAuthoring: 'ChatGPT wrote this brief from our own short request; we pasted it into Claude.' as string | null,
   otherTools: 'ChatGPT and Gemini (brainstorming, prompt writing) · Netlify (hosting)' as string | null,
-  codexPrompts: null as string | null, // the prompts given to Codex and what was asked (not in the report)
   referenceImage: null as string | null, // path to the capsule-hotel reference image the first brief mentions
 };

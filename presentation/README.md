@@ -122,15 +122,15 @@ node presentation/scripts/export.mjs
 
 Part II uses only verifiable material:
 
-* **Our project report** — how the idea came about, who wrote the prompts (ChatGPT, from our own requests:
-  meta-prompting), our original requests to ChatGPT, the tools, Netlify and the pros and cons come from it.
+* **Our project report** — how the idea came about, how we used ChatGPT to sharpen prompts (meta-prompting),
+  our original bug-fix request, the tools, Netlify and the pros and cons come from it.
 * **Prompts** — quoted verbatim from the project conversation; word counts measured from it
   (2,105 · 498 · 1,290 · 744 words; this deck’s brief: 1,240).
 * **Timestamps** — conversation log and file modification times (Rome time). First prompt Nov 25, 21:11;
   v1 screenshots 22:06; Codex changes 13:20–16:28 on Nov 26 (33 files); 19 h 17 min in total.
 * **“Before” images** — screenshots the AI took of its own earlier versions during development
   (`public/media/history/`), plus our own 20-second screen recording (`clips/before_cabin.mp4`) and the broken-wordmark image we pasted.
-* **Numbers** — 1,242 agent steps, 202 terminal commands, 126 in-page checks, 157 screenshots (counted from the log);
+* **Numbers** — 8 messages we sent Claude Code for the website (4 written prompts, 2 “run it”s, 2 answers), 1,242 agent steps, 202 terminal commands, 126 in-page checks, 157 screenshots (counted from the log);
   14,015 lines of code in 57 files (counted from `src/`); no 3D model files in the project.
 * **The product** — the live 3D slides run the website's own code. The other footage and stills were captured from the
   finished website at 1920 × 1080 in headless Chrome (`scripts/record.mjs`).
@@ -140,10 +140,10 @@ Part II uses only verifiable material:
 
 These appear on screen as dashed **“To add”** markers until filled in (`src/config.ts`):
 
-1. **Team names** and who presents which part (`TEAM`; slides already assign speakers 1–4).
+1. ~~Team names~~ — done: Antonio Maria Cosentino, Nicolas Schön, Alessandro Grande, Matteo Gelsomino (`TEAM`).
 2. ~~How the idea came about~~ — done, from our report (brainstorm with Claude, ChatGPT and Gemini; Japanese pod hotels).
-3. ~~Who drafted the 2,105-word creative brief~~ — done: ChatGPT, from our own request (report).
-4. **The prompts given to Codex** (we can see *what* changed, not what was asked).
+3. ~~Who drafted the 2,105-word creative brief~~ — we wrote it ourselves; not specified on the slides.
+4. ~~The prompts given to Codex~~ — left out of the slides.
 5. ~~Any other GenAI tools~~ — done: ChatGPT and Gemini, plus Netlify for hosting (report).
 6. The **capsule-hotel reference image** the first brief mentions (it is not in the project history).
 7. ~~The public website URL~~ — done: `somnaairlines.netlify.app`, from our project report (`PUBLIC_URL`).

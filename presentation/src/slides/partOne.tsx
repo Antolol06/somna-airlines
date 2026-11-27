@@ -489,7 +489,7 @@ export const PART_ONE: SlideDef[] = [
     live: SHOTS.cabin,
     render: Manifesto,
     notes:
-      'Our vision in one sentence — it is also the first line of the brief that started the project: “We are not selling flights. We are selling the feeling of waking up somewhere new.” Hand over to Presenter 2.',
+      'Our vision in one sentence — it is also the first line of the brief that started the project: “We are not selling flights. We are selling the feeling of waking up somewhere new.” Hand over to Nicolas.',
   },
   {
     id: 'triptych',
@@ -577,7 +577,7 @@ export const PART_ONE: SlideDef[] = [
     className: 's-why',
     render: Why,
     notes:
-      'Why people will book it: you are not buying a seat — you are buying a morning. A real bed, a night shaped around you, and a trip that starts rested. From €190 (illustrative). Hand over to Presenter 3 for the demo.',
+      'Why people will book it: you are not buying a seat — you are buying a morning. A real bed, a night shaped around you, and a trip that starts rested. From €190 (illustrative). Hand over to Alessandro for the demo.',
   },
   {
     id: 'demo',

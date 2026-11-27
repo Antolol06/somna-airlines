@@ -8,15 +8,14 @@ import cameraSource from '@site/three/scenes/cabinCamera.ts?raw';
 // ---------------------------------------------------------------- the verified record
 /**
  * The prompts Claude received, exactly as sent (local time, Rome; word counts from the conversation
- * log). As our report describes, ChatGPT wrote them from our own requests (meta-prompting); where the
- * report quotes our original request, it is shown as `ours`, verbatim.
+ * log). Where our report quotes the request we first gave ChatGPT to turn into a prompt (meta-prompting),
+ * it is shown as `ours`, verbatim.
  */
 const PROMPTS: { when: string; words: number; label: string; quote: string; also: string; ours?: string; result: string; img: string }[] = [
   {
     when: 'Nov 25 · 21:11',
     words: 2105,
     label: 'The creative brief',
-    ours: 'You need to build to me a prompt to create an interactive 3d website style (like apple presentation ones or like this one https://oryzo.ai/).',
     quote: 'Design and develop a fully functional, cinematic, interactive 3D website for SŌMNA.',
     also: 'The website should feel like an interactive short film in which the visitor controls the camera and the journey.',
     result: 'v1 running 55 minutes later: seven chapters, a 3D aircraft, the capsule, a globe and a dream sequence.',
@@ -81,7 +80,7 @@ function Behind(c: SlideCtx) {
           <Lines lines={['Behind', <em key="e">the dream.</em>]} at={0.3} />
         </h1>
         <Rv at={1} as="p" className="lede">
-          How we built <Brand /> with Generative AI — ideas from three models, prompts by ChatGPT, code by Claude, nineteen hours.
+          How we built <Brand /> with Generative AI — ideas from three models, prompts sharpened with ChatGPT, code by Claude, nineteen hours.
         </Rv>
       </div>
     </>
@@ -97,11 +96,10 @@ const Idea = (c: SlideCtx) => (
         <Lines lines={['“We are not selling flights.', <em key="e">We are selling the feeling of</em>, <em key="f">waking up somewhere new.”</em>]} at={0.25} gap={0.16} />
       </blockquote>
       <Rv at={1.2} className="annot">
-        The first line of the brief ChatGPT wrote for us · sent to Claude Nov 25, 21:11
+        The first line of our first prompt · Nov 25, 21:11
       </Rv>
       <Rv at={1.4} className="id-missing">
         {MISSING.ideaOrigin ? <p className="lede">{MISSING.ideaOrigin}</p> : <Missing label="how the idea first came up — and whether AI helped brainstorm it" />}
-        {MISSING.briefAuthoring ? <p className="lede">{MISSING.briefAuthoring}</p> : <Missing label="who drafted the brief, and with which tool" />}
       </Rv>
     </div>
     <div className="id-brief">
@@ -109,7 +107,7 @@ const Idea = (c: SlideCtx) => (
         <strong>
           <Counter to={2105} c={c} delay={0.6} />
         </strong>
-        <span className="annot">words in the creative brief ChatGPT wrote from our request</span>
+        <span className="annot">words in our first prompt — a full creative brief</span>
       </Rv>
       <dl className="id-anatomy">
         {[
@@ -141,7 +139,7 @@ const TOOLS = [
   { n: 'Claude · ChatGPT · Gemini', by: 'three models', role: 'The brainstorm', use: 'We gave all three the course brief. Their ideas converged — memories, dreams, a “Dreamflix” — until our prompts became more specific.' },
   { n: 'ChatGPT', by: 'OpenAI', role: 'The prompt writer', use: 'Turned our own words into detailed prompts for Claude — meta-prompting, based on our specifications.' },
   { n: 'Claude Code', by: 'Anthropic', role: 'The builder', use: 'Wrote and debugged the site in 1,242 agent steps, and checked its own work in its browser: 157 screenshots, 126 in-page measurements.' },
-  { n: 'Codex', by: 'OpenAI', role: 'The finisher', use: 'The final polish on day two, 13:20–16:28: 33 files — showcase, navigation, cabin map, the capsule tablet, a demo checkout and a downloadable boarding pass.', missing: 'codexPrompts' },
+  { n: 'Codex', by: 'OpenAI', role: 'The finisher', use: 'The final polish on day two, 13:20–16:28: 33 files — showcase, navigation, cabin map, the capsule tablet, a demo checkout and a downloadable boarding pass.' },
   { n: 'Unsplash', by: 'human photographers', role: 'The destinations', use: 'Eight licensed photographs of real cities — chosen with the AI, credited on screen. Not AI-generated.' },
   { n: 'Code, not stock', by: 'procedural', role: 'Everything else', use: 'Aircraft, cabins, capsules, clouds and sky are generated in code; the globe uses NASA’s public-domain satellite textures.' },
   { n: 'Netlify', by: 'hosting', role: 'The launch', use: 'Hosts the website and this presentation: somnaairlines.netlify.app.' },
@@ -172,12 +170,6 @@ const Tools = (c: SlideCtx) => (
           <span className="tl-role">{t.role}</span>
           <p>
             {t.use}
-            {t.missing && !MISSING.codexPrompts && (
-              <>
-                {' '}
-                <Missing label="Codex prompts" />
-              </>
-            )}
           </p>
         </Rv>
       ))}
@@ -204,7 +196,7 @@ const Prompts = (c: SlideCtx) => {
         </ol>
       </div>
       <div className="pr-main" key={cur}>
-        <span className="annot pr-num">Prompt 0{cur + 1} · written with ChatGPT, sent to Claude · verbatim</span>
+        <span className="annot pr-num">Prompt 0{cur + 1} · sent to Claude · verbatim</span>
         <blockquote className="d-m">“{bt(p.quote)}”</blockquote>
         {p.ours ? (
           <p className="pr-also pr-ours">
@@ -234,7 +226,7 @@ const PromptResult = (c: SlideCtx) => (
         <Typewriter c={c} text="Think of a camera mounted on a professional cinematic dolly rather than a first-person video game." cps={34} delay={0.6} />
       </p>
       <Rv at={0.3} className="annot">
-        Prompt 04 · written with ChatGPT · sent Nov 26, 12:14 with a 20-second screen recording of what felt wrong
+        Prompt 04 · Nov 26, 12:14 · sent with a 20-second screen recording of what felt wrong
       </Rv>
     </div>
     <div className="px-compare">
@@ -256,7 +248,7 @@ const PromptResult = (c: SlideCtx) => (
 
 // ---------------------------------------------------------------- 19 · evolution timeline
 const STAGES = [
-  { t: 'Nov 25 · 21:11', h: 'The brief', b: '2,105 words, written by ChatGPT', img: null },
+  { t: 'Nov 25 · 21:11', h: 'The brief', b: '2,105 words', img: null },
   { t: '22:06', h: 'v1 is live', b: 'First self-review screenshots', img: 'history/v1_hero.jpg' },
   { t: '22:35', h: 'v2', b: 'Globe, the Ō, a new cabin', img: 'history/v2_cabin.jpg' },
   { t: 'Nov 26 · 10:04', h: 'v3', b: 'Three cabins, real cities', img: 'history/v3_os.jpg' },
@@ -346,7 +338,7 @@ const BeforeAfterSlide = (c: SlideCtx) => {
 };
 
 // ---------------------------------------------------------------- 22 · human in the loop
-// Our own words only — the long prompts Claude received were written by ChatGPT (see the report).
+// Our own words only.
 // Quotes 1, 4 and 5 are from our requests as quoted in the report; 2 and 3 are our replies to Claude.
 const DECISIONS = [
   { q: 'I do not want the cabin to be like one man is walking', ctx: 'We judged the work. The AI never decided something was good enough.' },
@@ -381,7 +373,7 @@ const Human = (c: SlideCtx) => (
 // ---------------------------------------------------------------- 23 · by the numbers
 const NUMBERS: { n: number; f?: (v: number) => string; l: string }[] = [
   { n: 19.3, f: (v) => v.toFixed(1), l: 'hours from first prompt to finished site' },
-  { n: 4, l: 'prompts, written with ChatGPT, that shaped the product in Claude Code' },
+  { n: 8, l: 'messages we sent Claude Code to build the website' },
   { n: 1242, l: 'agent steps in one conversation' },
   { n: 157, l: 'screenshots the AI took to review its own work' },
   { n: 14015, l: 'lines of code across 57 files' },
@@ -491,7 +483,7 @@ export const PART_TWO: SlideDef[] = [
     seconds: 15,
     className: 's-behind',
     render: Behind,
-    notes: 'Part II. On the left, the product; on the right, the real code behind its camera — written by AI, directed by us. “Three models for the idea, ChatGPT for the prompts, Claude for the build — nineteen hours.”',
+    notes: 'Part II. On the left, the product; on the right, the real code behind its camera — written by AI, directed by us. “Three models for the idea, ChatGPT to sharpen the prompts, Claude for the build — nineteen hours.”',
   },
   {
     id: 'idea',
@@ -503,7 +495,7 @@ export const PART_TWO: SlideDef[] = [
     className: 's-idea',
     render: Idea,
     notes:
-      'We started by giving the course brief to Claude, ChatGPT and Gemini — and they kept converging on the same ideas: memories, dreams, a “Dreamflix”. Only when we made our prompts more specific did we find ours: an airline where you sleep in pods, inspired by Japanese pod hotels. We then asked ChatGPT to write the prompt for us, inspired by Apple’s scrolling pages and oryzo.ai — and it came back as a 2,105-word creative brief: the name, the promise, the palette, the rules. We pasted it into Claude.',
+      'We started by giving the course brief to Claude, ChatGPT and Gemini — and they kept converging on the same ideas: memories, dreams, a “Dreamflix”. Only when we made our prompts more specific did we find ours: an airline where you sleep in pods, inspired by Japanese pod hotels. Then we wrote our first prompt, inspired by Apple’s scrolling pages and oryzo.ai: a 2,105-word creative brief — the name, the promise, the palette, the rules — and pasted it into Claude.',
   },
   {
     id: 'tools',
@@ -515,7 +507,7 @@ export const PART_TWO: SlideDef[] = [
     className: 's-tools',
     render: Tools,
     notes:
-      'Three models for the brainstorm. ChatGPT as our prompt writer — we told it what we wanted, it wrote the detailed prompts. Claude Code built the product and checked its own work in its browser; Codex did the final polish. The photographs are real, licensed photos by human photographers — we chose not to fake cities. Everything 3D is generated in code, and Netlify hosts it all. This deck was made the same way. Hand over to Presenter 4.',
+      'Three models for the brainstorm. ChatGPT as our prompt writer — we told it what we wanted, it wrote the detailed prompts. Claude Code built the product and checked its own work in its browser; Codex did the final polish. The photographs are real, licensed photos by human photographers — we chose not to fake cities. Everything 3D is generated in code, and Netlify hosts it all. This deck was made the same way. Hand over to Matteo.',
   },
   {
     id: 'prompts',
@@ -528,7 +520,7 @@ export const PART_TWO: SlideDef[] = [
     className: 's-prompts',
     render: Prompts,
     notes:
-      'Four prompts did most of the work — quoted verbatim. Each one was written by ChatGPT from our own words: meta-prompting. 01: we asked for “a prompt to create an interactive 3d website”; ChatGPT wrote the brief. → 02 the first critique: the cabin was the weakest part, and the Ō was broken. → 03 compare our words — “one man is walking and the screen is shacking” — with the prompt ChatGPT made of them. → 04 with a screen recording: a camera on a dolly.',
+      'Four prompts did most of the work — quoted verbatim. 01 our creative brief. → 02 the first critique: the cabin was the weakest part, and the Ō was broken. → 03 here ChatGPT helped: compare our words — “one man is walking and the screen is shacking” — with the prompt it made of them (meta-prompting). → 04 with a screen recording: a camera on a dolly.',
   },
   {
     id: 'prompt-result',
@@ -551,7 +543,7 @@ export const PART_TWO: SlideDef[] = [
     seconds: 30,
     className: 's-timeline',
     render: Timeline,
-    notes: 'The whole evolution: the brief ChatGPT wrote for us, sent at 21:11; a running v1 at 22:06; four versions with Claude Code — slowed down by its usage limits — then Codex refinements from 13:20 to 16:28 the next day. Every timestamp comes from the project log and file history.',
+    notes: 'The whole evolution: the brief at 21:11; a running v1 at 22:06; four versions with Claude Code — slowed down by its usage limits — then Codex refinements from 13:20 to 16:28 the next day. Every timestamp comes from the project log and file history.',
   },
   {
     id: 'fails',
@@ -586,7 +578,7 @@ export const PART_TWO: SlideDef[] = [
     seconds: 25,
     className: 's-human',
     render: Human,
-    notes: 'Every quote here is something we typed ourselves — the long prompts Claude received were ChatGPT’s rewrites of words like these. We judged quality, set limits (“only free things”, when Claude asked about a paid map service), chose the photographs, asked for the real thing — and decided when it was finished.',
+    notes: 'Every quote here is something we typed ourselves — several of the prompts Claude received were ChatGPT’s rewrites of words like these. We judged quality, set limits (“only free things”, when Claude asked about a paid map service), chose the photographs, asked for the real thing — and decided when it was finished.',
   },
   {
     id: 'numbers',
@@ -597,7 +589,7 @@ export const PART_TWO: SlideDef[] = [
     seconds: 15,
     className: 's-numbers',
     render: Numbers,
-    notes: 'Quick: 19.3 hours, four prompts written with ChatGPT, 1,242 agent steps, 157 self-review screenshots, 14,015 lines of code — and not a single 3D model bought or downloaded.',
+    notes: 'Quick: 19.3 hours, 8 messages to Claude Code, 1,242 agent steps, 157 self-review screenshots, 14,015 lines of code — and not a single 3D model bought or downloaded.',
   },
   {
     id: 'honest',
