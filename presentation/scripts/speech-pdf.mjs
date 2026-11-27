@@ -2,7 +2,9 @@
 // script the presenter view shows, so the two never drift apart. Needs the deck running
 // (npx vite --config presentation/vite.config.ts).
 //
-//   node presentation/scripts/speech-pdf.mjs [http://localhost:5180/]
+//   node presentation/scripts/speech-pdf.mjs [http://localhost:5180/] [--speakers=1,2]
+//
+// --speakers picks whose parts go in the PDF (default 1,2; Speaker 3, the demo, is left out).
 import { launch, sleep } from './cdp.mjs';
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -12,7 +14,9 @@ import { tmpdir } from 'node:os';
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');
 const fonts = join(root, '..', 'node_modules', '@fontsource');
-const base = process.argv[2] || 'http://localhost:5180/';
+const args = process.argv.slice(2);
+const base = args.find((a) => !a.startsWith('--')) || 'http://localhost:5180/';
+const SPEAKERS = (args.find((a) => a.startsWith('--speakers='))?.slice(11) || '1,2').split(',').map(Number);
 const OUT = join(root, 'SOMNA-Part-I-Speech.pdf');
 
 const pad = (n) => String(n).padStart(2, '0');
@@ -32,8 +36,11 @@ const b = await launch({ port: 9353, profile: join(tmpdir(), 'somna-speech-pdf')
 await b.navigate(`${base}?still=1#1`);
 await sleep(2500);
 const slides = await b.evaluate(`(async () => { const m = await import('/src/slides/index.ts');
-  return m.SLIDES.map((s, i) => ({ n: i + 1, part: s.part, title: s.title, seconds: s.seconds, notes: s.notes, speaker: s.speaker + 1 })).filter((s) => s.part === 'I') })()`);
+  return m.SLIDES.map((s, i) => ({ n: i + 1, id: s.id, part: s.part, title: s.title, seconds: s.seconds, notes: s.notes, speaker: s.speaker + 1 })).filter((s) => s.part === 'I') })()`).then(
+  (all) => all.filter((s) => SPEAKERS.includes(s.speaker)),
+);
 const total = slides.reduce((a, s) => a + s.seconds, 0);
+const hasDemo = slides.some((s) => s.id === 'demo');
 
 // consecutive slides by the same speaker form one section
 const groups = [];
@@ -73,11 +80,11 @@ p{margin:0 0 2.3mm;font-size:10.8pt;line-height:1.58;font-weight:400}
 </style><body>
 <header class="head"><div class="wm">${brand('SŌMNA')}</div>
 <h1>Part I speech — the pitch</h1>
-<div class="mono">Slides 1–${slides.length} · about ${mmss(total)} · ${groups.length} speakers</div></header>
+<div class="mono">Slides ${slides[0].n}–${slides[slides.length - 1].n} · about ${mmss(total)} · ${groups.length} speakers</div></header>
 <p class="lead">What to say on each slide of Part I, with every click. The same script appears in the presenter view (press P during the presentation).</p>
 <table><tr><th>Slide</th><th>Title</th><th>Speaker</th><th>Time</th></tr>
 ${slides.map((s) => `<tr><td>${s.n}</td><td>${brand(esc(s.title))}</td><td>Speaker ${s.speaker}</td><td>${mmss(s.seconds)}</td></tr>`).join('')}
-<tr><td></td><td><b>Part I</b></td><td></td><td><b>${mmss(total)}</b></td></tr></table>
+<tr><td></td><td><b>Total</b></td><td></td><td><b>${mmss(total)}</b></td></tr></table>
 <p class="how"><span class="c k">→</span> press → or the clicker; on slides with builds it shows the next part of the same slide. <span class="c">Text like this</span> is a direction, not to be read aloud. Everything else is spoken, at a calm pace of about 130 words a minute.</p>
 ${groups
   .map(
@@ -88,12 +95,12 @@ ${g.slides
   )
   .join('\n')}
 <section class="tips"><h2 style="break-before:auto"><span class="mono">Before and during</span>Delivery tips</h2><ul>
-<li><b>Keys:</b> →, Space or the clicker go forward; ← goes back; Enter on slide 12 opens the website and Esc returns; F is full screen; B is a black screen.</li>
+<li><b>Keys:</b> →, Space or the clicker go forward; ← goes back;${hasDemo ? ' Enter on slide 12 opens the website and Esc returns;' : ''} F is full screen; B is a black screen.</li>
 <li><b>Presenter view:</b> press P to open this script, a timer and the current and next slides on the laptop screen. It shows which speaker is on and when to hand over.</li>
 <li><b>Builds:</b> slides 2, 7, 8 and 10 take extra clicks. Wait for each part to appear before you say it.</li>
 <li><b>The live capsule (slide 7):</b> one slow drag is enough to show it is real.</li>
 <li><b>Before you start:</b> open somnaairlines.netlify.app/presentation/ a minute early, so the 3D has loaded.</li>
-<li><b>No internet:</b> the demo slide plays a recorded walkthrough instead; narrate the same path over it.</li>
+${hasDemo ? '<li><b>No internet:</b> the demo slide plays a recorded walkthrough instead; narrate the same path over it.</li>' : ''}
 </ul></section>
 </body></html>`;
 
